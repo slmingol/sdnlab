@@ -5,7 +5,7 @@ $init = <<SCRIPT
   aptitude update
   aptitude install -y build-essential fakeroot debhelper autoconf automake libssl-dev graphviz \
   python-all python-qt4 python-twisted-conch libtool git tmux vim python-pip python-paramiko \
-  python-sphinx
+  python-sphinx mininet
   pip install alabaster
 SCRIPT
 
@@ -19,14 +19,14 @@ $ovs = <<SCRIPT
   rm -rf *openvswitch*
 SCRIPT
 
-$mininet = <<SCRIPT
-  git clone git://github.com/mininet/mininet
-  pushd mininet
-  git checkout -b 2.1.0p1 2.1.0p1
-  patch -p0 < /vagrant/mn-options.patch
-  ./util/install.sh -fn
-  popd
-SCRIPT
+# $mininet = <<SCRIPT
+#   git clone git://github.com/mininet/mininet
+#   pushd mininet
+#   git checkout -b 2.1.0p1 2.1.0p1
+#   patch -p0 < /vagrant/mn-options.patch
+#   ./util/install.sh -fn
+#   popd
+# SCRIPT
 
 $ryu = <<SCRIPT
   aptitude install -y python-lxml python-pbr python-greenlet
@@ -64,7 +64,7 @@ Vagrant.configure("2") do |config|
   ## Provisioning
   config.vm.provision :shell, :inline => $init
   config.vm.provision :shell, privileged: false, :inline => $ovs
-  config.vm.provision :shell, privileged: false, :inline => $mininet
+#  config.vm.provision :shell, privileged: false, :inline => $mininet
   # config.vm.provision :shell, :inline => $ryu
   # config.vm.provision :shell, privileged: false, :inline => $trema
   config.vm.provision :shell, :inline => $cleanup

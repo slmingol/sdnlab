@@ -5,8 +5,8 @@ OpenFlow 1.3 playground in a VM.
 
 Tools included:
 
-- Mininet 2.1.0
-- OpenVSwitch 2.3.0
+- Mininet 2.1.0-1
+- OpenVSwitch 2.3.0-1
 - Ryu
 - Trema Edge
 
